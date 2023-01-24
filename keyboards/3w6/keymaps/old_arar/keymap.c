@@ -51,23 +51,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     *                                          _____________________         _____________________
     *                                       __|__                   |       |                   __|__
     *                              _____   |     |                  v       v                  |     |   _____
-    *                       .-----|  E  |-----._____                                         _____.-----|  I  |-----.
-    *                 .-----|  W  |_____|  R  |  T  |  __           (       )           __  |  Y  |  U  |_____|  O  |-----.
-    *             __  |  Q  |-----|  D  |-----|_____|  __|--> +                   - <--|__  |_____|-----|  K  |-----|  P  |  __
-    *    ESC  <--|__  |-----|  S  |_____|  F  |  G  |               [       ]               |  H  |  J  |_____|  L  |-----|  __|--> '
-    *             __  |  A  |-----|  C  |-----|_____|  __                               __  |_____|-----| , < |-----| ; : |  __
-    *    TAB  <--|__  |-----|  X  |_____|  V  |  B  |  __|--> *     {       }     = <--|__  |  N  |  M  |_____| . > |-----|  __|--> "
-    *                 |  Z  |-----'     '-----|_____|                                       |_____|-----'     '-----| / ? |
-    *                 '-----'          .-----. _____   .-.._                           _..-.   _____ .-----.        '-----'
-    *                    |             | WIN ||CTRL | /     /                         \     \ | BSp || Del |           |
-    *                  SHIFT           '-----':_____|/ ENT /                           \ SPC \|_____:'-----'         SHIFT
-    *                                     |         '--.._/                             \_..--'  |      |
+    *                       .-----|  F  |-----._____                                         _____.-----|  U  |-----.
+    *                 .-----|  W  |_____|  P  |  B  |  __           (       )           __  |  J  |  L  |_____|  Y  |-----.
+    *             __  |  Q  |-----|  S  |-----|_____|  __|--> +                   - <--|__  |_____|-----|  E  |-----| Caps|  __
+    *    ESC  <--|__  |-----|  R  |_____|  T  |  G  |               [       ]               |  M  |  N  |_____|  I  |-----|  __|--> '
+    *             __  |  A  |-----|  C  |-----|_____|  __                               __  |_____|-----| , < |-----|  O  |  __
+    *    TAB  <--|__  |-----|  X  |_____|  D  |  V  |  __|--> *     {       }     = <--|__  |  H  |  M  |_____| . > |-----|  __|--> "
+    *                 |  Z  |-----'     '-----|_____|                                       |_____|-----'     '-----| TAB |
+    *                 '-----'          .-----. _____       .-.._                           _..-.   _____ .-----.        '-----'
+    *                    |             | ALT ||OS(_SYM) | /     /                         \     \ | BSp || Del |           |
+    *                  SHIFT           '-----':_________|/ SPC /                           \ ENT \|_____:'-----'         SHIFT
+    *                                     |             '--.._/                             \_..--'  |      |
     *                                    NUM                                                    NAV    SYM
     */
     [_ALPHA_QWERTY] = LAYOUT(
         KC_Q,         KC_W   , KC_F   , KC_P   , KC_B   ,                                    KC_J   , KC_L   , KC_U   , KC_Y   , KC_CAPS           ,
         KC_A,         KC_R   , KC_S   , KC_T   , KC_G   ,                                    KC_M   , KC_N   , KC_E   , KC_I   , KC_O        ,
-        LSFT_T(KC_Z), LCTL_T(KC_X)   , KC_C   , KC_D   , KC_V   ,                                    KC_H   , KC_M   , KC_COMM, LCTL_T(KC_DOT) , LSFT_T(KC_TAB),
+        LSFT_T(KC_Z), LCTL_T(KC_X)   , KC_C   , KC_D   , KC_V   ,                            KC_H   , KC_M   , KC_COMM, LCTL_T(KC_DOT) , LSFT_T(KC_TAB),
                                 LALT(KC_NO), OSL(_SYM),  LT(_NAV,KC_SPC),       KC_SPC, LT(_NUM ,KC_ENT), KC_NO
     ),
 
@@ -138,39 +138,39 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 };
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
+// bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+//     switch (keycode) {
 
-        /* Space Enter swap */
-        case KC_THUMB_SWAP:
-            if (record->event.pressed) {
-                unregister_code(KC_SPC);
-                unregister_code(KC_ENT);
-                swap_space_enter = !swap_space_enter;
-            }
-            return false;
-            break;
+//         /* Space Enter swap */
+//         case KC_THUMB_SWAP:
+//             if (record->event.pressed) {
+//                 unregister_code(KC_SPC);
+//                 unregister_code(KC_ENT);
+//                 swap_space_enter = !swap_space_enter;
+//             }
+//             return false;
+//             break;
 
-        case KC_ENT:
-            if (swap_space_enter) {
-                if (record->event.pressed) {
-                    register_code(KC_SPC);
-                } else {
-                    unregister_code(KC_SPC);
-                }
-                return false;
-            }
-            break;
-        case KC_SPC:
-            if (swap_space_enter) {
-                if (record->event.pressed) {
-                    register_code(KC_ENT);
-                } else {
-                    unregister_code(KC_ENT);
-                }
-                return false;
-            }
-            break;
-    }
-    return true;
-}
+//         case KC_ENT:
+//             if (swap_space_enter) {
+//                 if (record->event.pressed) {
+//                     register_code(KC_SPC);
+//                 } else {
+//                     unregister_code(KC_SPC);
+//                 }
+//                 return false;
+//             }
+//             break;
+//         case KC_SPC:
+//             if (swap_space_enter) {
+//                 if (record->event.pressed) {
+//                     register_code(KC_ENT);
+//                 } else {
+//                     unregister_code(KC_ENT);
+//                 }
+//                 return false;
+//             }
+//             break;
+//     }
+//     return true;
+// }

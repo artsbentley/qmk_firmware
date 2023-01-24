@@ -16,8 +16,20 @@
 
 #pragma once
 
-#define COMBO_VARIABLE_LEN
+#define CB(name, action, ...) C_##name,
+enum user_combos {
+#include "combos.def"
+    COMBO_LENGTH
+};
+#undef CB
+uint16_t COMBO_LEN = COMBO_LENGTH;
 
-#define COMBO_TERM 25        // how quickly all combo keys must be pressed in succession to trigger
-#define COMBO_MUST_HOLD_MODS // if a combo triggers a modifier, only trigger when the combo is held
-#define COMBO_HOLD_TERM 175  // how long at least one of the combo keys must be held to trigger
+#define CB(name, action, ...) const uint16_t PROGMEM name##_combo[] = {__VA_ARGS__, COMBO_END};
+#include "combos.def"
+#undef CB
+
+combo_t key_combos[COMBO_LENGTH] = {
+#define CB(name, action, ...) COMBO(name##_combo, action),
+#include "combos.def"
+#undef CB
+};
