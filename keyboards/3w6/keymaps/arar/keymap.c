@@ -68,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NAV] = LAYOUT(
         KC_1         , KC_MUTE, KC_VOLD, KC_VOLU, KC_5,                                        KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_PSCR,
         OSM(MOD_LSFT), OSM(MOD_LCTL), OSM(MOD_LALT), OSM(MOD_LGUI), KC_ESC,                   KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_H,
-        LSFT_T(KC_6), LALT_T(KC_7), LCTL_T(KC_8), KC_NO, KC_0,                                KC_K, KC_M, LCTL_T(KC_NO), LALT_T(KC_NO), RSFT_T(KC_SCLN) ,
+        LSFT_T(KC_Z), LGUI_T(KC_X), KC_8, KC_NO, KC_0,                                KC_K, KC_M, KC_NO, LGUI_T(KC_X), RSFT_T(KC_Z) ,
                                         KC_TRNS, KC_TRNS, KC_TRNS,                    LALT(KC_BSPC), KC_DEL, KC_TRNS
     ),
 
@@ -115,6 +115,7 @@ const uint16_t PROGMEM j_slash_combo[] = {KC_J, KC_SLASH, COMBO_END};
 combo_t key_combos[] = {
 //   [EM_EMAIL] = COMBO_ACTION(email_combo),
   COMBO(q_w_combo, KC_TAB),
+	COMBO(z_b_combo, LGUI),
 };
 
 // #define NXTTAB LCTL(KC_PGDN)
