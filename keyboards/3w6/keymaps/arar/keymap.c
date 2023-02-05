@@ -68,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NAV] = LAYOUT(
         KC_1         , KC_MUTE, KC_VOLD, KC_VOLU, KC_5,                                        KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_PSCR,
         OSM(MOD_LSFT), OSM(MOD_LCTL), OSM(MOD_LALT), OSM(MOD_LGUI), KC_ESC,                   KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_H,
-        LSFT_T(KC_Z), LGUI_T(KC_X), KC_8, KC_NO, KC_0,                                KC_K, KC_M, KC_NO, LGUI_T(KC_X), RSFT_T(KC_Z) ,
+        LSFT_T(KC_TRNS), LGUI_T(KC_TRNS), KC_8, KC_NO, KC_0,                                KC_K, KC_M, KC_NO, LGUI_T(KC_TRNS), RSFT_T(KC_TRNS) ,
                                         KC_TRNS, KC_TRNS, KC_TRNS,                    LALT(KC_BSPC), KC_DEL, KC_TRNS
     ),
 
@@ -87,6 +87,7 @@ enum combo_events {
 };
 
 uint16_t COMBO_LEN = COMBO_LENGTH; // remove the COMBO_COUNT define and use this instead!
+COMBO_LENGTH = 3
 
 // left hand combinations.
 const uint16_t PROGMEM q_w_combo[] = {KC_Q, KC_W, COMBO_END};
@@ -111,11 +112,14 @@ const uint16_t PROGMEM l_u_combo[] = {KC_L, KC_U, COMBO_END};
 const uint16_t PROGMEM j_l_combo[] = {KC_J, KC_L, COMBO_END};
 const uint16_t PROGMEM k_h_combo[] = {KC_K, KC_H, COMBO_END};
 const uint16_t PROGMEM j_slash_combo[] = {KC_J, KC_SLASH, COMBO_END};
+const uint16_t PROGMEM dot_tab_combo[] = {KC_DOT, KC_TAB, COMBO_END};
+
 
 combo_t key_combos[] = {
 //   [EM_EMAIL] = COMBO_ACTION(email_combo),
-  COMBO(q_w_combo, KC_TAB),
-	COMBO(z_b_combo, LGUI),
+  COMBO(w_f_combo , KC_TAB),
+	COMBO(z_x_combo, L_CTL),
+	COMBO(dot_tab_combo, L_CTL)
 };
 
 // #define NXTTAB LCTL(KC_PGDN)
