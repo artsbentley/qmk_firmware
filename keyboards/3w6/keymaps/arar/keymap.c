@@ -36,12 +36,15 @@ enum layers
     _SYM,
     _NAV,
     _NUM,
+		_TILINGWM,
 };
 
 #define _ALPHA_COLEMAK 0
 #define _NAV 1
 #define _SYM 2
 #define _NUM 3
+#define _TILINGWM 4
+
 
 // #define ____ KC_TRNS
 
@@ -54,7 +57,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_Q,         KC_W   , KC_F   , KC_P   , KC_B   ,                                    KC_J   , KC_L   , KC_U   , KC_Y   , CW_TOGG           ,
         KC_A,         KC_R   , KC_S   , KC_T   , KC_G   ,                                    KC_M   , KC_N   , KC_E   , KC_I   , KC_O        ,
         LSFT_T(KC_Z), LGUI_T(KC_X)   , KC_C   , KC_D   , KC_V   ,                            KC_K   , KC_H   , KC_COMM, LGUI_T(KC_DOT) , LSFT_T(KC_TAB),
-                                LALT(KC_NO), OSL(_SYM),  LT(_NAV,KC_SPC),       LSFT_T(KC_BSPC), LT(_NUM ,KC_ENT), LALT(KC_NO)
+                         LT(_TILINGWM, KC_NO), OSL(_SYM),  LT(_NAV,KC_SPC),       LSFT_T(KC_BSPC), LT(_NUM ,KC_ENT), LALT(KC_NO)
     ),
 
  
@@ -78,16 +81,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LSFT, LCA(KC_DEL), SWIN(KC_S), KC_DOWN, KC_TRNS,                                XXXXXXX, KC_6, XXXXXXX, KC_F11 , RSFT_T(KC_F12) ,
                                              KC_TRNS, KC_TRNS, KC_TRNS,                    KC_TRNS, KC_TRNS, KC_TRNS
     ),
+
+		[_TILINGWM] = LAYOUT(
+			KC_1   , KC_2       , KC_F      , KC_4   , KC_5         ,                                KC_6   , KC_7   , KC_UP   , KC_9   , KC_0   ,
+			KC_1,    KC_2,        KC_3      , KC_4   , KC_5        ,                                KC_H   , KC_J   , KC_K   , KC_L   , KC_0 ,
+			KC_LSFT, LCA(KC_DEL), SWIN(KC_S), KC_D, KC_TRNS,                                XXXXXXX, KC_6, XXXXXXX, KC_F11 , RSFT_T(KC_F12) ,
+																					 KC_TRNS, KC_TRNS, KC_TRNS,                    KC_TRNS, KC_TRNS, KC_TRNS
+	),
+
 };
 
 enum combo_events {
-  EM_EMAIL,
+  W_F_COMBO,
+	Z_X_COMBO,
+	DOT_TAB_COMBO,	
 
   COMBO_LENGTH
 };
 
 uint16_t COMBO_LEN = COMBO_LENGTH; // remove the COMBO_COUNT define and use this instead!
-COMBO_LENGTH = 3
 
 // left hand combinations.
 const uint16_t PROGMEM q_w_combo[] = {KC_Q, KC_W, COMBO_END};
@@ -113,14 +125,50 @@ const uint16_t PROGMEM j_l_combo[] = {KC_J, KC_L, COMBO_END};
 const uint16_t PROGMEM k_h_combo[] = {KC_K, KC_H, COMBO_END};
 const uint16_t PROGMEM j_slash_combo[] = {KC_J, KC_SLASH, COMBO_END};
 const uint16_t PROGMEM dot_tab_combo[] = {KC_DOT, KC_TAB, COMBO_END};
+const uint16_t PROGMEM i_o_combo[] = {KC_I, KC_O, COMBO_END};
+
 
 
 combo_t key_combos[] = {
 //   [EM_EMAIL] = COMBO_ACTION(email_combo),
   COMBO(w_f_combo , KC_TAB),
-	COMBO(z_x_combo, L_CTL),
-	COMBO(dot_tab_combo, L_CTL)
+	COMBO(a_r_combo, KC_LCTL),
+	COMBO(i_o_combo, KC_LCTL)
 };
+
+void matrix_scan_user(void)
+{  // runs frequently to update info
+    uint8_t layer = biton32(layer_state);
+    static uint8_t current_layer = 0;
+    static bool has_layer_changed = false;
+    static bool is_alted = false;
+
+    if (layer != current_layer)
+    {
+        has_layer_changed = true;
+        current_layer = layer;
+    }
+    // Check layer, and apply color if its changed since last check
+    if (has_layer_changed)
+    {
+        if (layer == _TILINGWM)
+        {
+            register_code(KC_LALT);
+            is_alted = true;
+        }
+        else
+        {
+            if (is_alted)
+            {
+                unregister_code(KC_LALT);
+                is_alted = false;
+            }
+        }
+
+        has_layer_changed = false;
+    }
+ };
+
 
 // #define NXTTAB LCTL(KC_PGDN)
 // #define PRVTAB LCTL(KC_PGUP)
