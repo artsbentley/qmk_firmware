@@ -20,7 +20,6 @@
 #include <stdint.h>
 // #include "g/keymap_combo.h"
 
-
 // #include "config.h"
 #pragma once
 
@@ -69,10 +68,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_NAV] = LAYOUT(
-        KC_1         , KC_MUTE, KC_VOLD, KC_VOLU, KC_5,                                        KC_HOME, KC_PGDN, KC_PGUP, KC_END, KC_PSCR,
-        OSM(MOD_LSFT), OSM(MOD_LCTL), OSM(MOD_LALT), OSM(MOD_LGUI), KC_ESC,                   KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_H,
+        KC_1         , KC_MUTE, KC_VOLD, KC_VOLU, KC_5,                                        KC_H, KC_J, KC_K, KC_L, KC_PSCR,
+        KC_1,    KC_2,        KC_3      , KC_4   , KC_5,                                        KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_H,
         LSFT_T(KC_TRNS), LGUI_T(KC_TRNS), KC_8, KC_NO, KC_0,                                KC_K, KC_M, KC_NO, LGUI_T(KC_TRNS), RSFT_T(KC_TRNS) ,
-                                        KC_TRNS, KC_TRNS, KC_TRNS,                    LALT(KC_BSPC), KC_DEL, KC_TRNS
+                                        KC_TRNS, KC_TRNS, KC_TRNS,                    LCTL_T(KC_BSPC), KC_DEL, KC_TRNS
     ),
 
     [_NUM] = LAYOUT(
@@ -85,8 +84,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		[_TILINGWM] = LAYOUT(
 			KC_1   , KC_2       , KC_F      , KC_4   , KC_5         ,                                KC_6   , KC_7   , KC_UP   , KC_9   , KC_0   ,
 			KC_1,    KC_2,        KC_3      , KC_4   , KC_5        ,                                KC_H   , KC_J   , KC_K   , KC_L   , KC_0 ,
-			KC_LSFT, LCA(KC_DEL), SWIN(KC_S), KC_D, KC_TRNS,                                XXXXXXX, KC_6, XXXXXXX, KC_F11 , RSFT_T(KC_F12) ,
-																					 KC_TRNS, KC_TRNS, KC_TRNS,                    KC_TRNS, KC_TRNS, KC_TRNS
+			KC_LSFT, LCTL(KC_DEL), SWIN(KC_S), KC_D, KC_TRNS,                                XXXXXXX, KC_6, XXXXXXX, KC_F11 , RSFT_T(KC_F12) ,
+																					 KC_TRNS, KC_TRNS, KC_TRNS,                    KC_LCTL, KC_LSFT, KC_TRNS
 	),
 
 };
@@ -95,6 +94,11 @@ enum combo_events {
   W_F_COMBO,
 	Z_X_COMBO,
 	DOT_TAB_COMBO,	
+	ESC_COMBO,
+	ESC_COMBO_AFTER,
+	/* CAPS_WORD, */
+	BACKSPACE_COMBO,
+	DELETE_COMBO,
 
   COMBO_LENGTH
 };
@@ -126,6 +130,8 @@ const uint16_t PROGMEM k_h_combo[] = {KC_K, KC_H, COMBO_END};
 const uint16_t PROGMEM j_slash_combo[] = {KC_J, KC_SLASH, COMBO_END};
 const uint16_t PROGMEM dot_tab_combo[] = {KC_DOT, KC_TAB, COMBO_END};
 const uint16_t PROGMEM i_o_combo[] = {KC_I, KC_O, COMBO_END};
+const uint16_t PROGMEM e_i_combo[] = {KC_E, KC_I, COMBO_END};
+const uint16_t PROGMEM u_y_combo[] = {KC_U, KC_Y, COMBO_END};
 
 
 
@@ -133,7 +139,12 @@ combo_t key_combos[] = {
 //   [EM_EMAIL] = COMBO_ACTION(email_combo),
   COMBO(w_f_combo , KC_TAB),
 	COMBO(a_r_combo, KC_LCTL),
-	COMBO(i_o_combo, KC_LCTL)
+	COMBO(i_o_combo, KC_LCTL),
+	COMBO(s_t_combo, KC_ESC),
+	COMBO(r_s_combo, KC_ESC),
+	/* COMBO(z_x_combo, CW_TOGG), */
+	COMBO(e_i_combo, LALT(KC_BSPC)),
+	COMBO(u_y_combo, LALT(KC_DEL)),
 };
 
 void matrix_scan_user(void)
@@ -168,6 +179,7 @@ void matrix_scan_user(void)
         has_layer_changed = false;
     }
  };
+
 
 
 // #define NXTTAB LCTL(KC_PGDN)
