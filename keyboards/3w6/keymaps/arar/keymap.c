@@ -143,8 +143,8 @@ combo_t key_combos[] = {
 	COMBO(s_t_combo, KC_ESC),
 	COMBO(r_s_combo, KC_ESC),
 	/* COMBO(z_x_combo, CW_TOGG), */
-	COMBO(e_i_combo, LALT(KC_BSPC)),
-	COMBO(u_y_combo, LALT(KC_DEL)),
+	COMBO(e_i_combo, KC_BSPC),
+	COMBO(u_y_combo, LALT(KC_BSPC)),
 };
 
 void matrix_scan_user(void)
