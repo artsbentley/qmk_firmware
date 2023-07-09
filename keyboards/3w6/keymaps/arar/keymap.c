@@ -51,7 +51,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     // /*
     // */
-   
+
     [_ALPHA_COLEMAK] = LAYOUT(
         KC_Q,         KC_W   , KC_F   , KC_P   , KC_B   ,                                    KC_J   , KC_L   , KC_U   , KC_Y   , CW_TOGG           ,
         KC_A,         KC_R   , KC_S   , KC_T   , KC_G   ,                                    KC_M   , KC_N   , KC_E   , KC_I   , KC_O        ,
@@ -59,7 +59,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                          MO(_TILINGWM), OSL(_SYM),  LT(_NAV,KC_SPC),       LSFT_T(KC_BSPC), LT(_NUM ,KC_ENT), LALT(KC_NO)
     ),
 
- 
+
     [_SYM] = LAYOUT(
         KC_EXLM,         KC_AT  , KC_HASH, KC_DLR , KC_PERC,                                KC_LT, KC_LBRC, KC_EQL, KC_RBRC, KC_GT        ,
         KC_QUES ,         KC_QUOT, KC_DQUO, KC_SCLN, KC_TILD,                                KC_LCBR, KC_LPRN, KC_COLN, KC_RPRN, KC_RCBR        ,
@@ -69,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_NAV] = LAYOUT(
         KC_1         , KC_MUTE, KC_VOLD, KC_VOLU, KC_5,                                        KC_H, KC_J, KC_K, KC_L, KC_PSCR,
-        KC_1,    KC_2,        KC_3      , KC_4   , KC_5,                                        KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_H,
+        KC_F5,   KC_F4,    KC_F3 , KC_F2   , KC_F1,                                        KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_H,
         LSFT_T(KC_TRNS), LGUI_T(KC_TRNS), KC_8, KC_NO, KC_0,                                KC_K, KC_M, KC_NO, LGUI_T(KC_TRNS), RSFT_T(KC_TRNS) ,
                                         KC_TRNS, KC_TRNS, KC_TRNS,                    LCTL_T(KC_BSPC), KC_DEL, KC_TRNS
     ),
@@ -93,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 enum combo_events {
   W_F_COMBO,
 	Z_X_COMBO,
-	DOT_TAB_COMBO,	
+	DOT_TAB_COMBO,
 	ESC_COMBO,
 	ESC_COMBO_AFTER,
 	/* CAPS_WORD, */
@@ -199,7 +199,7 @@ void matrix_scan_user(void)
 //   COMBO(q_w_combo, KC_ESCAPE)};
 //   COMBO(p_b_combo, KC_TAB),
 //   COMBO(w_p_combo, KC_LGUI),
-  
+
 //   COMBO(w_f_combo, KC_LCTL),
 //   COMBO(f_p_combo, KC_LSFT),
 //   COMBO(f_b_combo, KC_LALT),
