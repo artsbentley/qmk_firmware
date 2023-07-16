@@ -67,10 +67,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                         KC_TRNS, KC_TRNS, KC_TRNS,                    KC_TRNS, KC_TRNS, KC_TRNS
     ),
 
+
     [_NAV] = LAYOUT(
-        KC_1         , KC_MUTE, KC_VOLD, KC_VOLU, KC_5,                                        KC_H, KC_J, KC_K, KC_L, KC_PSCR,
+        KC_1,    KC_2,        KC_3      , KC_4   , KC_5        ,                                KC_6   , KC_7   , KC_8   , KC_9   , KC_0 ,
         KC_F5,   KC_F4,    KC_F3 , KC_F2   , KC_F1,                                        KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_H,
-        LSFT_T(KC_TRNS), LGUI_T(KC_TRNS), KC_8, KC_NO, KC_0,                                KC_K, KC_M, KC_NO, LGUI_T(KC_TRNS), RSFT_T(KC_TRNS) ,
+        LSFT_T(KC_TRNS), LGUI_T(KC_MUTE), KC_VOLD, KC_VOLU, KC_0,                                KC_K, KC_M, KC_NO, LGUI_T(KC_TRNS), RSFT_T(KC_TRNS) ,
                                         KC_TRNS, KC_TRNS, KC_TRNS,                    LCTL_T(KC_BSPC), KC_DEL, KC_TRNS
     ),
 
@@ -143,7 +144,7 @@ combo_t key_combos[] = {
 	COMBO(s_t_combo, KC_ESC),
 	COMBO(r_s_combo, KC_ESC),
 	/* COMBO(z_x_combo, CW_TOGG), */
-	COMBO(e_i_combo, KC_BSPC),
+	/* COMBO(e_i_combo, KC_BSPC), */
 	COMBO(u_y_combo, LALT(KC_BSPC)),
 };
 
